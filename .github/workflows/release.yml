@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish to PyPI after all checks pass
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  pypi:
+    runs-on: ubuntu-24.04
+    environment:
+      name: pypi
+      url: https://pypi.org/p/tidyid
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - uses: astral-sh/setup-uv@v10.2.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - run: uv sync --locked --all-groups
+      - run: uv run ruff format --check .
+      - run: uv run ruff check --no-cache .
+      - run: uv run mypy --strict --no-incremental src tests
+      - run: uv run python -m unittest discover -s tests
+      - if: ${{ github.event_name == 'push' || inputs.publish }}
+        name: Verify release tag
+        shell: bash
+        run: |
+          expected="v$(uv run python -c 'import tidyid; print(tidyid.__version__)')"
+          test "$GITHUB_REF_TYPE" = "tag"
+          test "$GITHUB_REF_NAME" = "$expected"
+      - run: uv build
+      - run: uv run twine check --strict dist/*
+      - if: ${{ github.event_name == 'push' || inputs.publish }}
+        uses: pypa/gh-action-pypi-publish@v1.14.2
+        with:
+          packages-dir: dist/
+          verbose: true

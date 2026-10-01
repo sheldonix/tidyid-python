@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tidyid"
+dynamic = ["version"]
+description = "A tiny, secure, and human-friendly ID generator for Python."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [{ name = "TidyID contributors" }]
+keywords = [
+  "id",
+  "generator",
+  "random",
+  "secure",
+  "human-friendly",
+  "readable",
+  "csprng",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "mypy==1.19.1; python_version < '3.10'",
+  "mypy==2.3.1; python_version >= '3.10'",
+  "ruff==0.16.9",
+  "twine==7.0.0; python_version >= '3.10'",
+]
+
+[project.urls]
+Homepage = "https://github.com/sheldonix/tidyid-python"
+Repository = "https://github.com/sheldonix/tidyid-python.git"
+Issues = "https://github.com/sheldonix/tidyid-python/issues"
+
+[project.scripts]
+tidyid = "tidyid.__main__:main"
+
+[tool.hatch.version]
+path = "src/tidyid/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/benchmark", "/README.md", "/LICENSE"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tidyid"]
+
+[tool.ruff]
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "RUF", "SIM", "UP"]
+ignore = ["UP045"]
