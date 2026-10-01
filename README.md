@@ -1,9 +1,13 @@
-# TidyID
+<p align="center">
+  <img src="docs/media/logo-128.png" alt="TidyID" height="64">
+</p>
 
-[![PyPI version](https://img.shields.io/pypi/v/tidyid.svg)](https://pypi.org/project/tidyid/)
-[![Python](https://img.shields.io/pypi/pyversions/tidyid.svg)](https://pypi.org/project/tidyid/)
-[![Typing](https://img.shields.io/badge/typing-typed-3776AB.svg?logo=python&logoColor=white)](https://typing.python.org/)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/sheldonix/tidyid-python/blob/main/LICENSE)
+<p align="center">
+  <a href="https://pypi.org/project/tidyid/"><img src="https://img.shields.io/pypi/v/tidyid.svg" alt="PyPI version"></a>
+  <a href="https://pypi.org/project/tidyid/"><img src="https://img.shields.io/pypi/pyversions/tidyid.svg" alt="Python"></a>
+  <a href="https://typing.python.org/"><img src="https://img.shields.io/badge/typing-typed-3776AB.svg?logo=python&amp;logoColor=white" alt="Typing"></a>
+  <a href="https://github.com/sheldonix/tidyid-python/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
+</p>
 
 A tiny, secure, and human-friendly ID generator for Python.
 
